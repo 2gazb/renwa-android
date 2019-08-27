@@ -111,13 +111,16 @@ public class MainActivity extends AppCompatActivity {
 //        @FormUrlEncoded
         String str = "getter?name=renwa";
 
+
+
+
         HttpUrl url = HttpUrl.parse("getter?name=renwa");
 
 
 //        String encodedString = URLEncoder.encode("おすし", "UTF-8");
 //        try {
 //            final String encodedURL = URLEncoder.encode(str, "Shift-JIS");
-            Call<String> call = service.testCall("getter");
+            Call<String> call = service.testCall();
 //        Call<String> call = service.testCall(url);
 
 //        URL url = new URL(encodedURL);

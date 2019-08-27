@@ -41,9 +41,11 @@ public interface AppClient {
 //    Call<RenwaVoice> testCall(@Path(value = "id", encoded = true) HttpUrl url);
 
 
-    @GET("{id}")
-    Call<String> testCall(@Path("id") String url);
+    @GET("getter?name=renwa")
+    Call<String> testCall();
 
+//    @GET("/user/{name}")
+//    Call<ResponseBody> notEncoded(@Path(value="name", encoded=true) String name);
 
 //    @GET(PATH + "{id}")
 //    Call<RenwaVoice> testCall(@Path(value = "id", encoded = true) String str);
