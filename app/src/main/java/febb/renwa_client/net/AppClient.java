@@ -41,8 +41,29 @@ public interface AppClient {
 //    Call<RenwaVoice> testCall(@Path(value = "id", encoded = true) HttpUrl url);
 
 
-    @GET("getter?name=renwa")
-    Call<String> testCall();
+//    @GET("getter?name={str}")
+//    Call<String> testCall(@Path(value="str", encoded=true) String str);
+//
+//    @GET("feed/rdf/")
+//    fun getFreeSearch(@Query("s") s: String) : Observable<Article>
+
+//    @GET("getter?name=")
+//    Call<String> testCall(String str);
+//
+//    @GET("api.php")
+//    Call<Model> getRoms_center(@Query("company_name") String name);
+
+    @GET("getter?")
+    Call<String> testCall(@Query("name") String str);
+
+//    @GET("feed/rdf/")
+//    fun getFreeSearch(@Query("s") s: String) : Observable<Article>
+
+    //    @GET(PATH + "/pre_users")
+//    Call<PreUsers> getAuthCode(@HeaderMap Map<String, String> headers, @QueryMap HashMap<String, String> param);
+//
+
+
 
 //    @GET("/user/{name}")
 //    Call<ResponseBody> notEncoded(@Path(value="name", encoded=true) String name);

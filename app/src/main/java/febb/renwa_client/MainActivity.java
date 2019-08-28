@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 //        String encodedString = URLEncoder.encode("おすし", "UTF-8");
 //        try {
 //            final String encodedURL = URLEncoder.encode(str, "Shift-JIS");
-            Call<String> call = service.testCall();
+            Call<String> call = service.testCall("renwa");
 //        Call<String> call = service.testCall(url);
 
 //        URL url = new URL(encodedURL);
