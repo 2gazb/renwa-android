@@ -20,6 +20,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,17 +121,44 @@ public class MainActivity extends AppCompatActivity {
 //        String encodedString = URLEncoder.encode("おすし", "UTF-8");
 //        try {
 //            final String encodedURL = URLEncoder.encode(str, "Shift-JIS");
-            Call<String> call = service.testCall("renwa");
+            Call<String> call = service.testCall(authCode);
 //        Call<String> call = service.testCall(url);
 
 //        URL url = new URL(encodedURL);
+
+
+//        String target = "テストメッセージ";
+//
+//// エンコードの例
+//        String encodedResult = URLEncoder.encode(target, "UTF-8");
+//        System.out.println("エンコード結果:" + encodedResult);
+//
+//// デコードの例
+//        String decodedResult = null;
+//        try {
+//            decodedResult = URLDecoder.decode(encodedResult, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("デコード結果:" + decodedResult);
+
 
 
 //        Call<String> call = service.testCall(encodedURL);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("responseresponse", response.toString());
+
+                String decodedResult = response.toString();
+                String destr = "";
+                try {
+                    destr = URLDecoder.decode(decodedResult, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("responseresponse", destr);
+
             }
 
             @Override
