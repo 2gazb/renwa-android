@@ -50,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_main);
 //        txvResult = (TextView) findViewById(R.id.txvResult);
         setContentView(R.layout.activity_camera);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-//        String fromWhere = bundle.getString("FROM_WHERE");
+
         String fromWhere = "FROM_L";
 
         if (null == savedInstanceState) {
@@ -88,7 +86,13 @@ public class MainActivity extends AppCompatActivity {
                     sendAuthCode(result.get(0));
 
                     setContentView(R.layout.activity_done);
-
+                    String fromWhere = "FROM_L";
+//
+//                    if (null == savedInstanceState) {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                                .commit();
+//                    }
 
                 }
                 break;

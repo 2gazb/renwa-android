@@ -13,17 +13,18 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/container"
-    android:layout_width="match_parent"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:background="#000"
-    android:onClick="getSpeechInput"
-    tools:context="febb.renwa_client.MainActivity" >
+    android:layout_width="match_parent">
 
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -31,10 +32,21 @@
         android:layout_height="238dp"
         app:srcCompat="@drawable/done1" />
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="238dp"
+        android:background="#000"
+        android:layout_gravity="center"
+        android:onClick="getSpeechInput"
+        tools:context="febb.renwa_client.MainActivity" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="210dp"
         android:layout_gravity="bottom"
         app:srcCompat="@drawable/done2" />
-</FrameLayout>
+</LinearLayout>
+
+</RelativeLayout>
