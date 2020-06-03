@@ -20,60 +20,10 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/top_menu"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/colorPrimary"-->
-    <!--        android:gravity="center"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            android:padding="10dp">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/tvTitle"-->
-    <!--                android:textSize="17sp"-->
-    <!--                android:textColor="@color/colorWhite"-->
-    <!--                android:text="@string/camera_title"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:gravity="center"-->
-    <!--                android:layout_height="wrap_content" />-->
-    <!--        </LinearLayout>-->
-    <!--    </FrameLayout>-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/description"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/top_menu"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="30dp"-->
-    <!--        android:layout_marginBottom="15dp"-->
-    <!--        android:gravity="center"-->
-    <!--        android:text="@string/camera_guide_text"-->
-    <!--        android:textColor="@color/colorBlack"-->
-    <!--        android:textSize="16sp" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imageView2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="238dp"-->
-    <!--        android:layout_gravity="top"-->
-    <!--        android:src="@drawable/done1" />-->
-
-
     <febb.renwa_client.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
         android:layout_gravity="center_vertical" />
 
     <ImageView
@@ -123,32 +73,21 @@
         app:srcCompat="@drawable/done_l" />
 
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/surface_view_frame"-->
-    <!--        android:layout_width="195dp"-->
-    <!--        android:layout_height="295dp"-->
-    <!--        android:layout_below="@+id/description"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_gravity="center_vertical"-->
-    <!--        android:layout_marginTop="28dp"-->
-    <!--        android:src="@drawable/ic_photo_frame" />-->
-
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/control"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/texture"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:background="@color/colorWhite">-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/picture"-->
-    <!--            style="@style/CameraButton"-->
-    <!--            android:scaleType="fitCenter"-->
-    <!--            android:src="@drawable/ic_photo_camera" />-->
-
-    <!--    </FrameLayout>-->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/member" />
 
 </RelativeLayout>

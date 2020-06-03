@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -135,7 +136,13 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 //                    txvResult.setText(result.get(0));
 
-                    sendAuthCode(result.get(0));
+
+                    Log.d("result: ", result.get(0));
+//                    Log.d("result", result.get(0).toString());
+//                    Log.d("result", result.get(0));
+
+
+//                    sendAuthCode(result.get(0));
 
 //                    setContentView(R.layout.activity_done);
                     String fromWhere = "FROM_DONE";
@@ -243,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 音声認識の準備ができた時に呼ばれる
         public void onReadyForSpeech(Bundle params) {
-            Toast.makeText(getApplicationContext(), "話してください",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "話してください",
+//                    Toast.LENGTH_SHORT).show();
         }
 
         // 認識結果が準備できた時に呼ばれる
