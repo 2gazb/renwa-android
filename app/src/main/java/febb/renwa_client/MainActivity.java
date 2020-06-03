@@ -47,8 +47,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        txvResult = (TextView) findViewById(R.id.txvResult);
+//        setContentView(R.layout.activity_main);
+//        txvResult = (TextView) findViewById(R.id.txvResult);
+        setContentView(R.layout.activity_camera);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+//        String fromWhere = bundle.getString("FROM_WHERE");
+        String fromWhere = "FROM_L";
+
+        if (null == savedInstanceState) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                    .commit();
+        }
     }
 
     public void getSpeechInput(View view) {
@@ -72,9 +83,12 @@ public class MainActivity extends AppCompatActivity {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    txvResult.setText(result.get(0));
+//                    txvResult.setText(result.get(0));
 
                     sendAuthCode(result.get(0));
+
+                    setContentView(R.layout.activity_done);
+
 
                 }
                 break;
@@ -84,185 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendAuthCode(String authCode) {
 
+        ToastView(authCode);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(URL)
-//                .client(client)
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-//                .build();
-
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://flask-env.5csymrfgjb.us-east-2.elasticbeanstalk.com/")
-//                .baseUrl("http://127.0.0.1:5000/")
-//                .client(client)
-//                .addConverterFactory(GsonConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-//        retrofit.baseUrl(). += "/getter?name=renwa"
-
-        AppClient service = retrofit.create(AppClient.class);
-
-//        @FormUrlEncoded
-        String str = "getter?name=renwa";
-
-
-
-
-        HttpUrl url = HttpUrl.parse("getter?name=renwa");
-
-
-//        String encodedString = URLEncoder.encode("おすし", "UTF-8");
-//        try {
-//            final String encodedURL = URLEncoder.encode(str, "Shift-JIS");
-            Call<String> call = service.testCall(authCode);
-//        Call<String> call = service.testCall(url);
-
-//        URL url = new URL(encodedURL);
-
-
-//        String target = "テストメッセージ";
-//
-//// エンコードの例
-//        String encodedResult = URLEncoder.encode(target, "UTF-8");
-//        System.out.println("エンコード結果:" + encodedResult);
-//
-//// デコードの例
-//        String decodedResult = null;
-//        try {
-//            decodedResult = URLDecoder.decode(encodedResult, "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("デコード結果:" + decodedResult);
-
-
-
-//        Call<String> call = service.testCall(encodedURL);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-                String decodedResult = response.toString();
-                String destr = "";
-                try {
-                    destr = URLDecoder.decode(decodedResult, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d("responseresponse", destr);
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("debug22", t.getMessage());
-            }
-
-        });
-
-//        } catch (UnsupportedEncodingException e) {
-//            throw new IllegalArgumentException("failed to encode", e);
-//        }
-
-//        AppClient client = ServiceGenerator.createService(AppClient.class);
-//        Map<String, String> headers = CustomHTTPHeadersBuilder.createHeaders(AppClient.class,
-//                "getAuthCode",
-////                _sp.getSessionToken()
-//                "abcdefg"
-//        );
-//
-//
-//        HashMap<String, String> param = new HashMap<>();
-////        param.put("mail", mMailAddress);
-//
-////        param.put("name", String.valueOf(authCode));
-////        param.put("name", "renwa");
-//
-//        param.put("", "");
-//
-////        showLoadingDlg();
-//        Call<String> call = client.testCall(headers, param);
-//
-//        Log.d(TAG, "responceresponceheaders: " + headers);
-//        Log.d(TAG, "responceresponceparam: " + param);
-//
-//        try {
-//            call.enqueue(new Callback<String>() {
-//                @Override
-//                public void onResponse(Call<String> call, Response<String> response) {
-////                    cancelLoadingDlg();
-//                    if (response.code() == 200) {
-//                        if (response.body() != null) {
-//
-//
-//                            Log.d(TAG, "responceresponce1: " + response.body().toString());
-//
-//                            ToastView(response.body().toString());
-//
-////                            bundle.putString("MAIL_ADDRESS", mMailAddress);
-//
-//                            // Fragmentを生成し、setArgumentsで先ほどのbundleをセットする
-////                            Fragment fragment = new UserRegistFragment();
-////                            fragment.setArguments(bundle);
-////                            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_root);
-////                            layout.removeAllViews();
-////                            // FragmentをFragmentManagerにセットする
-////                            getFragmentManager().beginTransaction()
-////                                    .replace(R.id.layout_root, fragment, UserRegistFragment.TAG)
-////                                    .commit();
-//                        }
-//                    } else if (response.code() == 401) {
-//
-//                        Log.d(TAG, "responceresponce2: " + response.body().toString());
-//
-////                        if (mRetryFlg) {
-////                            _sp.resetLoginData();
-////                            moveAct(LoginActivity.class);
-////                        } else {
-////                            apiUpdateTokens((ApiCallback) _activity, API_GET_COUPON_LISTS);
-////                        }
-//                    } else {
-//
-//                        Log.d(TAG, "responceresponce3: " + response.body().toString());
-//
-//                        if (response.code() == 400) {
-//                            //複数項目のエラーメッセージが届くパターン
-////                            String errorMessage = ErrorUtils.parseErrorFiled(response);
-////                            ToastView(errorMessage);
-//                        } else {
-//                            //基本のエラーメッセージパターン
-////                            APIError error = ErrorUtils.parseError(response);
-////                            ToastView(error.message());
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<String> call, Throwable t) {
-//
-//                    Log.d(TAG, "responceresponce4");
-//
-////                    cancelLoadingDlg();
-////                    ToastView(getString(R.string.failure_api_message));
-//                }
-//            });
-//        } catch (Exception e) {
-//
-//            Log.d(TAG, "responceresponce5");
-//
-//            //エラーメッセージなど
-//            e.printStackTrace();
-////            cancelLoadingDlg();
-////            ToastView(getString(R.string.failure_api_message));
-//        }
     }
 
     public void ToastView(String message) {
