@@ -35,4 +35,9 @@
         <item name="android:background">@drawable/btn_blue_design</item>
     </style>
 
+    <style name="Text"/>
+    <style name="Text.Multiline">
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
 </resources>

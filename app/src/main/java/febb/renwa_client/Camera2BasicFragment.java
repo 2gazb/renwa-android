@@ -425,8 +425,8 @@ public class Camera2BasicFragment extends Fragment
             case "FROM_DONE":
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
 
-//            case "FROM_SEARCH":
-//                return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+            case "FROM_TALK":
+                return inflater.inflate(R.layout.fragment_camera2_timeline, container, false);
 
             default:
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);

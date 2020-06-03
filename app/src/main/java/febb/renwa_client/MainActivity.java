@@ -269,12 +269,21 @@ public class MainActivity extends AppCompatActivity {
             restartListeningService();
 
 
-            String fromWhere = "FROM_DONE";
+            if(resultsString.contains("昨日")) {
+                String fromWhere = "FROM_TALK";
 //
 //                    if (null == savedInstanceState) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
-                    .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                        .commit();
+            } else {
+                String fromWhere = "FROM_DONE";
+//
+//                    if (null == savedInstanceState) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                        .commit();
+            }
 
         }
 
