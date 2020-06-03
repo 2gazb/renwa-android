@@ -414,7 +414,24 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+//        whitch(fromWhere) {
+//            return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+//        }
+
+        switch (fromWhere) {
+            case "FROM_L":
+                return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+
+            case "FROM_DONE":
+                return inflater.inflate(R.layout.fragment_camera2_done, container, false);
+
+//            case "FROM_SEARCH":
+//                return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+
+            default:
+                return inflater.inflate(R.layout.fragment_camera2_done, container, false);
+        }
+
     }
 
     @Override
