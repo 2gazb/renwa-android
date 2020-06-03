@@ -26,11 +26,11 @@ xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="238dp"
-        app:srcCompat="@drawable/done1" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="238dp"-->
+<!--        app:srcCompat="@drawable/done1" />-->
 
     <FrameLayout
         android:id="@+id/container"
@@ -41,12 +41,12 @@ xmlns:tools="http://schemas.android.com/tools"
         android:onClick="getSpeechInput"
         tools:context="febb.renwa_client.MainActivity" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="210dp"
-        android:layout_gravity="bottom"
-        app:srcCompat="@drawable/done2" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="210dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:srcCompat="@drawable/done2" />-->
 </LinearLayout>
 
 </RelativeLayout>
