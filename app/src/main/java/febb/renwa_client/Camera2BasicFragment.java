@@ -39,6 +39,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -70,6 +71,7 @@ public class Camera2BasicFragment extends Fragment
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
     private static String fromWhere = "";
+    private static String talk = "";
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -156,6 +158,10 @@ public class Camera2BasicFragment extends Fragment
      * An {@link AutoFitTextureView} for camera preview.
      */
     private AutoFitTextureView mTextureView;
+
+    private Button tweet1;
+
+    private Boolean talkFlg = false;
 
     /**
      * A {@link CameraCaptureSession } for camera preview.
@@ -405,8 +411,9 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    public static Camera2BasicFragment newInstance(String fromWhich) {
+    public static Camera2BasicFragment newInstance(String fromWhich, String tweet) {
         fromWhere = fromWhich;
+        talk = tweet;
 
         return new Camera2BasicFragment();
     }
@@ -425,7 +432,11 @@ public class Camera2BasicFragment extends Fragment
             case "FROM_DONE":
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
 
+            case "FROM_CORONA":
+                return inflater.inflate(R.layout.fragment_camera2_hukidashi, container, false);
+
             case "FROM_TALK":
+                talkFlg = true;
                 return inflater.inflate(R.layout.fragment_camera2_timeline, container, false);
 
             default:
@@ -438,12 +449,20 @@ public class Camera2BasicFragment extends Fragment
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 //        view.findViewById(R.id.picture).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+        if(talkFlg) {
+            tweet1 = (Button) view.findViewById(R.id.button2);
+        }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        if(talkFlg) {
+            if(talk.contains("渋谷")) {
+                tweet1.setText("渋谷で");
+            }
+        }
     }
 
     @Override
@@ -623,7 +642,7 @@ public class Camera2BasicFragment extends Fragment
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
-            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
+            if (!mCameraOpenCloseLock.tryAcquire(9900, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
             manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);

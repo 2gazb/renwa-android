@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (null == savedInstanceState) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                    .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, ""))
                     .commit();
         }
 
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    if (null == savedInstanceState) {
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                                .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,""))
                                 .commit();
 //                    }
 
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                     reason = "ERROR_SPEECH_TIMEOUT";
                     break;
             }
-            Toast.makeText(getApplicationContext(), reason, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), reason, Toast.LENGTH_SHORT).show();
             restartListeningService();
         }
 
@@ -274,14 +274,21 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else if(resultsString.contains("コロナ")) {
+                String fromWhere = "FROM_CORONA";
+//
+//                    if (null == savedInstanceState) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
             } else {
                 String fromWhere = "FROM_DONE";
 //
 //                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
                         .commit();
             }
 
