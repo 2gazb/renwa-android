@@ -13,6 +13,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -28,11 +29,16 @@ public class MainActivity extends AppCompatActivity {
     private SpeechRecognizer speech;
     private SpeechRecognizer sr;
 
+    private ImageView mic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_camera);
+
+
+        mic = findViewById(R.id.imageView8);
 
         String fromWhere = "FROM_L";
 
@@ -130,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
+
         switch (requestCode) {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
@@ -146,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                    setContentView(R.layout.activity_done);
                     String fromWhere = "FROM_DONE";
+                    mic.setVisibility(View.GONE);
 //
 //                    if (null == savedInstanceState) {
                         getSupportFragmentManager().beginTransaction()
@@ -283,8 +292,15 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else {
+            } else if(resultsString.contains("爆発")) {
                 String fromWhere = "FROM_DONE";
+//
+//                    if (null == savedInstanceState) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else {
+                String fromWhere = "FROM_L";
 //
 //                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
