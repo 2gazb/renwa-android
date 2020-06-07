@@ -161,6 +161,8 @@ public class Camera2BasicFragment extends Fragment
 
     private Button tweet1;
 
+    private Button tweet2;
+
     private Boolean talkFlg = false;
 
     /**
@@ -439,6 +441,30 @@ public class Camera2BasicFragment extends Fragment
                 talkFlg = true;
                 return inflater.inflate(R.layout.fragment_camera2_timeline, container, false);
 
+            case "FROM_1":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest1, container, false);
+
+            case "FROM_2":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest2, container, false);
+
+            case "FROM_3":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest3, container, false);
+
+            case "FROM_4":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest4, container, false);
+
+            case "FROM_5":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest5, container, false);
+
+            case "FROM_6":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_suggest6, container, false);
+
             default:
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
         }
@@ -451,6 +477,7 @@ public class Camera2BasicFragment extends Fragment
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         if(talkFlg) {
             tweet1 = (Button) view.findViewById(R.id.button2);
+            tweet2 = (Button) view.findViewById(R.id.button3);
         }
     }
 
@@ -461,6 +488,7 @@ public class Camera2BasicFragment extends Fragment
         if(talkFlg) {
             if(talk.contains("渋谷")) {
                 tweet1.setText("渋谷で");
+                tweet2.setText("服買った");
             }
         }
     }

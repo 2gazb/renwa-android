@@ -110,7 +110,7 @@
         android:layout_marginTop="380dp"
 
         android:background="@drawable/talk_left"
-        android:text="コロナの第二波ってヤバイ？"
+        android:text="「コロナ」のニュースです"
         android:textColor="@color/colorBlack" />
 
     <ImageView
