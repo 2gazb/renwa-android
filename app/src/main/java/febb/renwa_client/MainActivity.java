@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 resultsString += results_array.get(i) + ";";
             }
             // トーストを使って結果表示
-            Toast.makeText(getApplicationContext(), resultsString, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), resultsString, Toast.LENGTH_LONG).show();
             restartListeningService();
 
 
