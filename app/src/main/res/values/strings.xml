@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">renwa-client</string>
+    <string name="camera_title">顔写真撮影</string>
+    <string name="camera_guide_text">枠内に顔が入るように撮影してください</string>
+    <string name="camera_error">この端末はカメラ機能をサポートしていません。</string>
+    <string name="request_permission">ユーザー認証、パスポート使用時の認証に使用します。</string>
 </resources>
