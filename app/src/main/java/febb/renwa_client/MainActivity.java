@@ -294,7 +294,13 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            }  else {
+
+            } else if (resultsString.contains("見つめ")) {
+                String fromWhere = "FROM_KARA";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else {
                 String fromWhere = "FROM_L";
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))

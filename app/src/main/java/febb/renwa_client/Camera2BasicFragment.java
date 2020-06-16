@@ -475,6 +475,10 @@ public class Camera2BasicFragment extends Fragment
                 talkFlg = true;
                 return inflater.inflate(R.layout.fragment_camera2_ok, container, false);
 
+            case "FROM_KARA":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_karaoke, container, false);
+
             default:
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
         }
