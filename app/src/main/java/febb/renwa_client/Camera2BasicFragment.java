@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
@@ -58,7 +57,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 
 public class Camera2BasicFragment extends Fragment
@@ -423,10 +421,6 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        whitch(fromWhere) {
-//            return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
-//        }
-
         switch (fromWhere) {
             case "FROM_L":
                 return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
@@ -465,15 +459,29 @@ public class Camera2BasicFragment extends Fragment
                 talkFlg = true;
                 return inflater.inflate(R.layout.fragment_camera2_suggest6, container, false);
 
+            case "FROM_UKE":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_uke, container, false);
+
+            case "FROM_CWARA":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_cwara, container, false);
+
+            case "FROM_NG":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_ng, container, false);
+
+            case "FROM_OK":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_ok, container, false);
+
             default:
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
         }
-
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-//        view.findViewById(R.id.picture).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         if(talkFlg) {
             tweet1 = (Button) view.findViewById(R.id.button2);
@@ -914,8 +922,6 @@ public class Camera2BasicFragment extends Fragment
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-
-
     }
 
     /**
@@ -956,26 +962,11 @@ public class Camera2BasicFragment extends Fragment
         bundle.putString("FOLDER_PATH", mFile.toString());
         bundle.putString("FILE_NAME", "pic.jpg");
 
-        if(fromWhere.equals("UserEditActivity")) {
-//            Intent intent = new Intent(getActivity(), UserEditActivity.class);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-        } else {
-//            Intent intent = new Intent(getActivity(), AuthCodeRegistActivity.class);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-        }
-
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.picture: {
-//                takePicture();
-//                break;
-//            }
         }
     }
 
@@ -1027,7 +1018,6 @@ public class Camera2BasicFragment extends Fragment
                 }
             }
         }
-
     }
 
     /**

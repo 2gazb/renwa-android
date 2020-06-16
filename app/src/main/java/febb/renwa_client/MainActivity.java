@@ -16,15 +16,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 
-
 public class MainActivity extends AppCompatActivity {
-
-
 
     private SpeechRecognizer speech;
     private SpeechRecognizer sr;
@@ -36,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_camera);
-
-
         mic = findViewById(R.id.imageView8);
-
         String fromWhere = "FROM_L";
 
         if (null == savedInstanceState) {
@@ -86,13 +81,8 @@ public class MainActivity extends AppCompatActivity {
             }
             // インテントの作成
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            // 言語モデル指定
-//            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-//                    RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
-
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
-
 
             sr.startListening(intent);
         } catch (Exception ex) {
@@ -103,21 +93,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getSpeechInput(View view) {
-
-//        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-//
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, 10);
-//        } else {
-//            Toast.makeText(this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
-//        }
-
-
-
-
-
     }
 
     // 音声認識を終了する
@@ -136,32 +111,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-
         switch (requestCode) {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//                    txvResult.setText(result.get(0));
 
-
-                    Log.d("result: ", result.get(0));
-//                    Log.d("result", result.get(0).toString());
-//                    Log.d("result", result.get(0));
-
-
-//                    sendAuthCode(result.get(0));
-
-//                    setContentView(R.layout.activity_done);
                     String fromWhere = "FROM_DONE";
                     mic.setVisibility(View.GONE);
-//
-//                    if (null == savedInstanceState) {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,""))
-                                .commit();
-//                    }
 
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, ""))
+                            .commit();
                 }
                 break;
         }
@@ -169,9 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void sendAuthCode(String authCode) {
-
         ToastView(authCode);
-
     }
 
     public void ToastView(String message) {
@@ -179,15 +137,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-
-
     // RecognitionListenerの定義
     // 中が空でも全てのメソッドを書く必要がある
     class listener implements RecognitionListener {
         // 話し始めたときに呼ばれる
         public void onBeginningOfSpeech() {
-            /*Toast.makeText(getApplicationContext(), "onBeginningofSpeech",
-                    Toast.LENGTH_SHORT).show();*/
         }
 
         // 結果に対する反応などで追加の音声が来たとき呼ばれる
@@ -197,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 話し終わった時に呼ばれる
         public void onEndOfSpeech() {
-            /*Toast.makeText(getApplicationContext(), "onEndofSpeech",
-                    Toast.LENGTH_SHORT).show();*/
         }
 
         // ネットワークエラーか認識エラーが起きた時に呼ばれる
@@ -244,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
                     reason = "ERROR_SPEECH_TIMEOUT";
                     break;
             }
-//            Toast.makeText(getApplicationContext(), reason, Toast.LENGTH_SHORT).show();
             restartListeningService();
         }
 
@@ -259,8 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 音声認識の準備ができた時に呼ばれる
         public void onReadyForSpeech(Bundle params) {
-//            Toast.makeText(getApplicationContext(), "話してください",
-//                    Toast.LENGTH_SHORT).show();
         }
 
         // 認識結果が準備できた時に呼ばれる
@@ -273,90 +222,84 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < results.size(); i++) {
                 resultsString += results_array.get(i) + ";";
             }
-            // トーストを使って結果表示
-//            Toast.makeText(getApplicationContext(), resultsString, Toast.LENGTH_LONG).show();
             restartListeningService();
 
-
-            if(resultsString.contains("昨日")) {
+            if (resultsString.contains("昨日")) {
                 String fromWhere = "FROM_TALK";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else if(resultsString.contains("コロナ")) {
+            } else if (resultsString.contains("コロナ")) {
                 String fromWhere = "FROM_CORONA";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else if(resultsString.contains("爆発")) {
+            } else if (resultsString.contains("爆発")) {
                 String fromWhere = "FROM_DONE";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("きたよ")) {
+            } else if (resultsString.contains("きたよ")) {
                 String fromWhere = "FROM_1";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("散髪")) {
+            } else if (resultsString.contains("散髪")) {
                 String fromWhere = "FROM_2";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("うん")) {
+            } else if (resultsString.contains("うんそう")) {
                 String fromWhere = "FROM_3";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("三茶")) {
+            } else if (resultsString.contains("三茶")) {
                 String fromWhere = "FROM_4";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("そうそう")) {
+            } else if (resultsString.contains("そうそう")) {
                 String fromWhere = "FROM_5";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("なに")) {
+            } else if (resultsString.contains("なんだ")) {
                 String fromWhere = "FROM_6";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else  if(resultsString.contains("クリア")) {
+            } else if (resultsString.contains("クリア")) {
                 String fromWhere = "FROM_L";
-//
-//                    if (null == savedInstanceState) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
-            } else {
-                String fromWhere = "FROM_L";
-//
-//                    if (null == savedInstanceState) {
+            } else if (resultsString.contains("笑える")) {
+                String fromWhere = "FROM_UKE";
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere,resultsString))
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else if (resultsString.contains("うける")) {
+                String fromWhere = "FROM_CWARA";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else if (resultsString.contains("光")) {
+                String fromWhere = "FROM_OK";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            } else if (resultsString.contains("えっと")) {
+                String fromWhere = "FROM_NG";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                        .commit();
+            }  else {
+                String fromWhere = "FROM_L";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
                         .commit();
             }
-
         }
 
         // サウンドレベルが変わったときに呼ばれる
