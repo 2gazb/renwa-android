@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private SpeechRecognizer sr;
 
     private ImageView mic;
+    private Boolean supportFlg =false;
+    private Boolean campFlg =false;
+    private Boolean commerceFlg =false;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS)
+                == PackageManager.PERMISSION_GRANTED)
             return;
         else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
@@ -142,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
     class listener implements RecognitionListener {
         // 話し始めたときに呼ばれる
         public void onBeginningOfSpeech() {
+
+
         }
 
         // 結果に対する反応などで追加の音声が来たとき呼ばれる
@@ -224,88 +233,176 @@ public class MainActivity extends AppCompatActivity {
             }
             restartListeningService();
 
-            if (resultsString.contains("昨日")) {
-                String fromWhere = "FROM_TALK";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("コロナ")) {
-                String fromWhere = "FROM_CORONA";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("爆発")) {
-                String fromWhere = "FROM_DONE";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("きたよ")) {
-                String fromWhere = "FROM_1";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("散髪")) {
-                String fromWhere = "FROM_2";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("うんそう")) {
-                String fromWhere = "FROM_3";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("三茶")) {
-                String fromWhere = "FROM_4";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("そうそう")) {
-                String fromWhere = "FROM_5";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("なんだ")) {
-                String fromWhere = "FROM_6";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("クリア")) {
-                String fromWhere = "FROM_L";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("笑える")) {
-                String fromWhere = "FROM_UKE";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("うける")) {
-                String fromWhere = "FROM_CWARA";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("光")) {
-                String fromWhere = "FROM_OK";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
-            } else if (resultsString.contains("えっと")) {
-                String fromWhere = "FROM_NG";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
+            if(commerceFlg) {
+                if(count == 0) {
+                    String fromWhere = "FROM_C2";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                    count++;
+                } else if(count == 1) {
+                    String fromWhere = "FROM_C3";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                    count++;
+                }
+            } else if(campFlg) {
+                if(count == 0) {
+                    String fromWhere = "FROM_T2";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                    count++;
+                } else if(count == 1) {
+                    String fromWhere = "FROM_T3";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                    count++;
+                } else if(count == 2) {
+                    String fromWhere = "FROM_T4";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                    count++;
+                }
+            } else if(!supportFlg) {
 
-            } else if (resultsString.contains("見つめ")) {
-                String fromWhere = "FROM_KARA";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
+                if (resultsString.contains("昨日")) {
+                    String fromWhere = "FROM_TALK";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("コロナ")) {
+                    String fromWhere = "FROM_CORONA";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("爆発")) {
+                    String fromWhere = "FROM_DONE";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("きたよ")) {
+                    String fromWhere = "FROM_1";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("散髪")) {
+                    String fromWhere = "FROM_2";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("うんそう")) {
+                    String fromWhere = "FROM_3";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("三茶")) {
+                    String fromWhere = "FROM_4";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("そうそう")) {
+                    String fromWhere = "FROM_5";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("なんだ")) {
+                    String fromWhere = "FROM_6";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("クリア")) {
+                    String fromWhere = "FROM_L";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("笑える")) {
+                    String fromWhere = "FROM_UKE";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("うける")) {
+                    String fromWhere = "FROM_CWARA";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("光")) {
+                    String fromWhere = "FROM_OK";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("えっと")) {
+                    String fromWhere = "FROM_NG";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+
+                } else if (resultsString.contains("見つめ")) {
+                    String fromWhere = "FROM_KARA";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("会員")) {
+                    String fromWhere = "FROM_SUPPORT";
+                    supportFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("トクホ")) {
+                    String fromWhere = "FROM_T1";
+                    campFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("美味しい")) {
+                    String fromWhere = "FROM_C1";
+                    commerceFlg = true;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else {
+                    String fromWhere = "FROM_L";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                }
             } else {
-                String fromWhere = "FROM_L";
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
-                        .commit();
+                if (resultsString.contains("クレジット")) {
+                    String fromWhere = "FROM_CARD";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("パソコン")) {
+                    String fromWhere = "FROM_PC";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("設定")) {
+                    String fromWhere = "FROM_SETTING";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else if (resultsString.contains("メモリ")) {
+                    String fromWhere = "FROM_S2";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                } else {
+                    String fromWhere = "FROM_L";
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, Camera2BasicFragment.newInstance(fromWhere, resultsString))
+                            .commit();
+                }
             }
+
         }
 
         // サウンドレベルが変わったときに呼ばれる

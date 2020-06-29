@@ -479,6 +479,56 @@ public class Camera2BasicFragment extends Fragment
                 talkFlg = true;
                 return inflater.inflate(R.layout.fragment_camera2_karaoke, container, false);
 
+            case "FROM_SUPPORT":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_support1, container, false);
+
+            case "FROM_CARD":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_support2, container, false);
+
+            case "FROM_PC":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_support3, container, false);
+
+            case "FROM_SETTING":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_support4, container, false);
+
+            case "FROM_S2":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_support5, container, false);
+
+
+            case "FROM_T1":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_count3, container, false);
+
+            case "FROM_T2":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_count2, container, false);
+
+            case "FROM_T3":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_count1, container, false);
+
+            case "FROM_T4":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_goal, container, false);
+
+            case "FROM_C1":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_commerce1, container, false);
+
+            case "FROM_C2":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_commerce2, container, false);
+
+            case "FROM_C3":
+                talkFlg = true;
+                return inflater.inflate(R.layout.fragment_camera2_commerce3, container, false);
+
+
             default:
                 return inflater.inflate(R.layout.fragment_camera2_done, container, false);
         }
