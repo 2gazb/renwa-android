@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                     SpeechRecognizer.RESULTS_RECOGNITION);
             // 取得した文字列を結合
             String resultsString = "";
-            for (int i = 0; i < results.size(); i++) {
+            for (int i = 0; i < results.size()-1; i++) {
                 resultsString += results_array.get(i) + ";";
             }
             restartListeningService();
